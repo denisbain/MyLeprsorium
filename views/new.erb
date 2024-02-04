@@ -1,7 +1,8 @@
 <h3>Add new post</h3>
 <form action="/new" method="POST">
   <div class="form-floating">
-    <textarea class="form-control" placeholder="Enter post here" rows="6"></textarea><br />
+    <input name="author" type="text" class="form-control"  placeholder="Enter your name"><br />
+    <textarea name="content" class="form-control" placeholder="Enter post here" rows="6"></textarea><br />
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>
