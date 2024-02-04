@@ -6,12 +6,11 @@
   <br />
   <span style="font-size: 75%; color: #999"> <%= @row['created_date'] %></span>
   <br /><br />
-  <textarea name="comment" class="form-control" placeholder="Enter comment here" rows="6"></textarea><br />
-  <button type="submit" class="btn btn-primary">Submit</button>
 </p>
 
 
-<form>
-
+<form action="/index/<%= @row['id'] %>" method="POST">
+  <textarea name="comment" class="form-control" placeholder="Enter comment here" rows="6"></textarea><br />
+  <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>

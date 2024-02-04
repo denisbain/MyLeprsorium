@@ -95,3 +95,24 @@ get '/index/:post_id' do
 
   erb :details
 end
+
+get '/index/:post_id' do
+  init_db
+  post_id = params[:post_id]
+  content = params[:content]
+
+  results = @db.execute 'SELECT * FROM Posts where id = ?', [post_id]
+  @row = results[0]
+
+  erb :details
+end
+
+post '/index/:post_id' do
+  init_db
+  comment = params[:comment]
+  post_id = params[:post_id]
+  
+  @comments = @db.execute 'INSERT INTO Comments (comment) VALUES (?)', [comment]
+
+  redirect to('/index/' + post_id)
+end
