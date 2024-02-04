@@ -72,3 +72,7 @@ post '/new' do
 
   redirect to '/'
 end
+
+get '/index' do
+  erb "Hello World"
+end
