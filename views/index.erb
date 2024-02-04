@@ -1,0 +1,10 @@
+<h3>Latest posts</h3><br />
+<% @results.each do |post| %>
+  <i><b><%= post['author'] %></b></i>
+  <br /><br />
+  <i><%= post['content'] %></i>
+  <br />
+ <span style="font-size: 75%; color: #999"> <%= post['created_date'] %></span>
+  <br />
+  <hr>
+<% end %>

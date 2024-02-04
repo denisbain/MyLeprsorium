@@ -70,9 +70,13 @@ post '/new' do
 
   @db.execute 'INSERT INTO Posts (author, content, created_date) VALUES (?, ?, datetime())', [author, content]
 
-  redirect to '/'
+  redirect to '/index'
 end
 
 get '/index' do
-  erb "Hello World"
+  init_db
+
+  @results = @db.execute 'SELECT * FROM Posts ORDER BY id DESC'
+
+  erb :index
 end
