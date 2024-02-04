@@ -13,6 +13,7 @@ configure do
   @db.execute 'CREATE TABLE IF NOT EXISTS Posts
                   (
                       id            INTEGER PRIMARY KEY AUTOINCREMENT,
+                      author        TEXT,
                       created_date  TEXT,
                       content       TEXT
                   )'
@@ -63,5 +64,11 @@ get '/new' do
 end
 
 post '/new' do
-  erb "Hello World"
+  init_db
+  content = params[:content]
+  author = params[:author]
+
+  @db.execute 'INSERT INTO Posts (author, content, created_date) VALUES (?, ?, datetime())', [author, content]
+
+  redirect to '/'
 end
