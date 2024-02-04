@@ -4,11 +4,19 @@ require 'sinatra/reloader'
 require 'sqlite3'
 
 def init_db
-  db = SQLite3::Database.new(leprosorium2.db)
-  db.results_as_hash = true
+  @db = SQLite3::Database.new 'leprosorium2.db'
+  @db.results_as_hash = true
 end
 
 configure do
+  init_db
+  @db.execute 'CREATE TABLE IF NOT EXISTS Posts
+                  (
+                      id            INTEGER PRIMARY KEY AUTOINCREMENT,
+                      created_date  TEXT,
+                      content       TEXT
+                  )'
+
   enable :sessions
 end
 
@@ -19,6 +27,7 @@ helpers do
 end
 
 before '/secure/*' do
+  init_db
   unless session[:identity]
     session[:previous_url] = request.path
     @error = 'Sorry, you need to be logged in to visit ' + request.path
