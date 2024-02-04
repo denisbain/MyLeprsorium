@@ -17,7 +17,11 @@ configure do
                       created_date  TEXT,
                       content       TEXT
                   )'
-
+  @db.execute 'CREATE TABLE IF NOT EXISTS Comments
+                  (
+                      id            INTEGER PRIMARY KEY AUTOINCREMENT,
+                      comment       TEXT
+                  )'
   enable :sessions
 end
 
@@ -82,8 +86,12 @@ get '/index' do
 end
 
 get '/index/:post_id' do
+  init_db
   post_id = params[:post_id]
   content = params[:content]
 
-  erb "You typed #{content} and number of po post #{post_id}"
+  results = @db.execute 'SELECT * FROM Posts where id = ?', [post_id]
+  @row = results[0]
+
+  erb :details
 end
