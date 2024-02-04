@@ -8,6 +8,9 @@
   <br /><br />
 </p>
 
+<% @comments.each do |item| %>
+  <%= item['comment'] %>
+<% end %>
 
 <form action="/index/<%= @row['id'] %>" method="POST">
   <textarea name="comment" class="form-control" placeholder="Enter comment here" rows="6"></textarea><br />
